@@ -476,3 +476,5 @@ All training scripts utilize `random_state=42` and stratified splits to guarante
 ## License
 
 This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+#   H e a r t - D i s e a s e - P r e d i c t i o n - U s i n g - L o g i s t i c - R e g r e s s i o n  
+ 
