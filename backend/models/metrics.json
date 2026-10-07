@@ -1,0 +1,94 @@
+{
+  "dataset_summary": {
+    "total_samples": 630000,
+    "train_samples": 504000,
+    "test_samples": 126000,
+    "features_count": 16,
+    "feature_order": [
+      "age",
+      "sex",
+      "cp",
+      "trestbps",
+      "chol",
+      "fbs",
+      "restecg",
+      "thalach",
+      "exang",
+      "oldpeak",
+      "slope",
+      "ca",
+      "thal",
+      "age_thalach_interaction",
+      "hypertension",
+      "high_cholesterol"
+    ],
+    "input_features": [
+      "age",
+      "sex",
+      "cp",
+      "trestbps",
+      "chol",
+      "fbs",
+      "restecg",
+      "thalach",
+      "exang",
+      "oldpeak",
+      "slope",
+      "ca",
+      "thal"
+    ],
+    "derived_features": [
+      "age_thalach_interaction",
+      "hypertension",
+      "high_cholesterol"
+    ],
+    "target_distribution": {
+      "Absence (0)": 347546,
+      "Presence (1)": 282454
+    }
+  },
+  "logistic_regression": {
+    "training_time_seconds": 49.47,
+    "best_params": {
+      "C": 0.01,
+      "class_weight": "balanced",
+      "max_iter": 1000,
+      "solver": "lbfgs"
+    },
+    "best_cv_roc_auc": 0.9503,
+    "accuracy": 0.8842,
+    "precision": 0.8673,
+    "recall": 0.8756,
+    "f1": 0.8714,
+    "roc_auc": 0.9516,
+    "confusion_matrix": [
+      [
+        61938,
+        7571
+      ],
+      [
+        7026,
+        49465
+      ]
+    ],
+    "model_coefficients": {
+      "age": 0.4532,
+      "sex": 0.4798,
+      "cp": 0.8817,
+      "trestbps": -0.0799,
+      "chol": 0.0188,
+      "fbs": -0.0084,
+      "restecg": 0.2177,
+      "thalach": -0.748,
+      "exang": 0.5384,
+      "oldpeak": 0.4545,
+      "slope": 0.4441,
+      "ca": 0.7017,
+      "thal": 0.9648,
+      "age_thalach_interaction": -0.1278,
+      "hypertension": 0.1053,
+      "high_cholesterol": 0.0978
+    },
+    "intercept": -0.0697
+  }
+}

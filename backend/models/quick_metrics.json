@@ -1,0 +1,63 @@
+{
+  "model_name": "Quick Logistic Regression (4 Features)",
+  "features": [
+    "age",
+    "sex",
+    "bp",
+    "max_hr"
+  ],
+  "feature_display_names": {
+    "age": "Age",
+    "sex": "Biological Sex",
+    "bp": "Blood Pressure (BP)",
+    "max_hr": "Heart Rate (Max HR)"
+  },
+  "dataset_summary": {
+    "total_samples": 630000,
+    "train_samples": 504000,
+    "test_samples": 126000,
+    "features_count": 4,
+    "target_distribution": {
+      "Absence (0)": 347546,
+      "Presence (1)": 282454
+    }
+  },
+  "logistic_regression": {
+    "training_time_seconds": 16.47,
+    "best_params": {
+      "C": 0.05,
+      "class_weight": "balanced",
+      "max_iter": 1000,
+      "solver": "lbfgs"
+    },
+    "best_cv_roc_auc": 0.8166,
+    "accuracy": 0.7402,
+    "precision": 0.6967,
+    "recall": 0.7448,
+    "f1": 0.72,
+    "roc_auc": 0.8195,
+    "confusion_matrix": [
+      [
+        51195,
+        18314
+      ],
+      [
+        14415,
+        42076
+      ]
+    ],
+    "counts": {
+      "tn": 51195,
+      "fp": 18314,
+      "fn": 14415,
+      "tp": 42076
+    },
+    "model_coefficients": {
+      "age": 0.427,
+      "sex": 0.7472,
+      "bp": -0.0065,
+      "max_hr": -1.056
+    },
+    "intercept": -0.0744
+  }
+}
