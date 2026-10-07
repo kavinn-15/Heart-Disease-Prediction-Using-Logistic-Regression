@@ -1,26 +1,34 @@
-# CardioPredict ML — Interpretable Heart Disease Risk Assessment
+<div align="center">
 
-[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg?logo=python)](https://www.python.org/)
-[![Flask 3.0](https://img.shields.io/badge/Flask-3.0-lightgrey.svg?logo=flask)](https://flask.palletsprojects.com/)
-[![React 18](https://img.shields.io/badge/React-18.3-61dafb.svg?logo=react)](https://react.dev/)
-[![Vite 6](https://img.shields.io/badge/Vite-6.4-646cff.svg?logo=vite)](https://vitejs.dev/)
-[![Scikit-Learn](https://img.shields.io/badge/scikit--learn-1.4%2B-orange.svg?logo=scikit-learn)](https://scikit-learn.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+# Heart Disease Prediction Using Logistic Regression
 
-An interpretable, production-ready, full-stack machine learning web application that calculates cardiovascular disease risk probabilities using calibrated L2-regularized Logistic Regression models. The system features a **Dual Prediction Engine** — offering both a **Detailed 13-Parameter Clinical Assessment** for comprehensive evaluations and an accessible **Quick 4-Measurement Risk Check** for rapid non-invasive screening.
+### *CardioPredict ML — Interpretable Dual-Engine Cardiovascular Risk Assessment*
+
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-3.0-000000?style=flat-square&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![React](https://img.shields.io/badge/React-18.3-20232A?style=flat-square&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-6.4-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Scikit-Learn](https://img.shields.io/badge/scikit--learn-1.4%2B-F7931E?style=flat-square&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-10B981?style=flat-square)](LICENSE)
+
+An interpretable, production-ready, full-stack machine learning web application that calculates cardiovascular disease risk probabilities using calibrated L2-regularized Logistic Regression models. Features a **Dual Prediction Engine** offering both a **Detailed 13-Parameter Clinical Assessment** and a rapid **Quick 4-Measurement Risk Check**.
+
+[Explore Features](#key-features) • [Quick Start](#installation--setup) • [Model Evaluation](#model-performance--evaluation) • [API Reference](#api-reference)
+
+</div>
 
 ---
 
-> [!CAUTION]
+> [!IMPORTANT]
 > **Academic and Educational Demonstration Notice**  
-> This software is developed strictly for **academic, educational, and machine learning research demonstration purposes**. It is **NOT** a certified medical diagnostic device and does **NOT** provide clinical diagnoses, medical opinions, prognoses, or therapeutic recommendations. All calculated probabilities, risk bands, and explanations are statistical model outputs (L2 Logistic Regression on the UCI Heart Disease dataset) and must never substitute for professional clinical consultation with licensed healthcare providers.
+> This application is developed strictly for **academic, educational, and machine learning research demonstration purposes**. It is **NOT** a certified medical diagnostic tool and does **NOT** provide clinical diagnoses, medical opinions, prognoses, or therapeutic recommendations. All calculated probabilities, risk bands, and feature explanations are statistical model outputs (L2 Logistic Regression on the UCI Heart Disease dataset) and must never replace clinical evaluation by licensed medical professionals.
 
 ---
 
 ## Table of Contents
 
 - [Overview](#overview)
-- [Dual Prediction Engine](#dual-prediction-engine)
+- [Dual Prediction Architecture](#dual-prediction-architecture)
 - [Key Features](#key-features)
   - [1. Patient Risk Assessment & Mode Selection](#1-patient-risk-assessment--mode-selection)
   - [2. Explainable AI & Feature Attribution](#2-explainable-ai--feature-attribution)
@@ -30,51 +38,55 @@ An interpretable, production-ready, full-stack machine learning web application 
   - [6. Interactive ROC Curve Explorer](#6-interactive-roc-curve-explorer)
   - [7. Confusion Matrix Explorer](#7-confusion-matrix-explorer)
   - [8. Model Coefficient Explorer](#8-model-coefficient-explorer)
-  - [9. Prediction History](#9-prediction-history)
+  - [9. Prediction History Manager](#9-prediction-history-manager)
   - [10. Printable PDF Clinical Reports](#10-printable-pdf-clinical-reports)
   - [11. Dark / Light Mode System](#11-dark--light-mode-system)
-- [Model Evaluation & Quality Gate](#model-evaluation--quality-gate)
+- [Model Performance & Evaluation](#model-performance--evaluation)
 - [Dataset & Clinical Biomarkers](#dataset--clinical-biomarkers)
 - [API Reference](#api-reference)
-- [Project Architecture & Directory Structure](#project-architecture--directory-structure)
-- [Installation & Local Setup](#installation--local-setup)
+- [Project Structure](#project-structure)
+- [Installation & Setup](#installation--setup)
 - [Running Automated Tests](#running-automated-tests)
 - [Model Training & Reproducibility](#model-training--reproducibility)
 - [Known Limitations & Safety Principles](#known-limitations--safety-principles)
+- [License](#license)
 
 ---
 
 ## Overview
 
-Cardiovascular disease (CVD) is the leading cause of mortality worldwide. Early risk stratification can assist clinicians and individuals in identifying elevated risk profiles. Many machine learning systems operate as opaque "black boxes"; **CardioPredict ML** prioritizes **interpretability, statistical transparency, and explainability**:
+Cardiovascular disease is the leading cause of mortality worldwide. Many modern machine learning solutions operate as opaque "black boxes", making it difficult to understand why a specific risk score was produced.
 
-- **No Black Boxes**: Implements mathematically transparent L2-regularized Logistic Regression where every prediction is fully decomposable into linear feature contributions ($z_i \times w_i$).
-- **Dual Prediction Engine**: Supports both a comprehensive 13-parameter clinical mode and an accessible 4-measurement preliminary mode.
-- **Trained on 630,000 Records**: Models are trained and rigorously evaluated on an expanded UCI Heart Disease clinical dataset (80% training / 20% held-out test split).
-- **Interactive Deep-Dive Suite**: Includes What-If counterfactual simulations, univariate perturbation curves, dynamic confusion matrices, ROC curves, and coefficient rankings.
+**CardioPredict ML** focuses on **interpretability, statistical transparency, and clinical usability**:
+
+- **White-Box Architecture**: Employs mathematically transparent L2-regularized Logistic Regression where every patient probability is fully explainable through linear feature attributions (`weight * standardized_value`).
+- **Dual Prediction Engine**: Provides both a comprehensive 13-parameter clinical mode and an accessible 4-measurement preliminary screening mode.
+- **Trained on 630,000 Records**: Trained and evaluated on an expanded UCI Heart Disease dataset (80% training / 20% held-out test split).
+- **Interactive Interpretability Suite**: Includes counterfactual simulations, univariate sensitivity curves, dynamic confusion matrices, ROC curve analysis, and coefficient inspection.
 
 ---
 
-## Dual Prediction Engine
+## Dual Prediction Architecture
 
-The application provides two genuinely independent modeling pipelines. **The 4-feature quick check does NOT feed partial inputs into the 13-feature model** — it utilizes its own dedicated scaler and trained Logistic Regression classifier.
+The application provides two genuinely independent modeling pipelines. **The Quick Risk Check does NOT feed partial inputs into the 13-feature model** — it utilizes its own dedicated scaler and trained classifier.
 
 ```
                               How would you like to assess risk?
-                                               │
-                       ┌───────────────────────┴───────────────────────┐
-                       ▼                                               ▼
+                                               |
+                       +-----------------------+-----------------------+
+                       |                                               |
+                       v                                               v
          [ Detailed Clinical Assessment ]               [ Quick Heart Risk Check ]
              13 Clinical Parameters                          4 Basic Measurements
-                       │                                               │
+                       |                                               |
              Input Validation (13)                           Input Validation (4)
-                       │                                               │
+                       |                                               |
          StandardScaler (16 terms with Z-score)         Dedicated StandardScaler (4 terms)
-                       │                                               │
+                       |                                               |
          L2 Logistic Regression (C=0.01, balanced)      L2 Logistic Regression (C=0.05, balanced)
-                       │                                               │
-             predict_proba()                                 predict_proba()
-                       │                                               │
+                       |                                               |
+                predict_proba()                                 predict_proba()
+                       |                                               |
          ROC-AUC: 95.16% | Accuracy: 88.42%             ROC-AUC: 81.95% | Accuracy: 74.02%
 ```
 
@@ -83,52 +95,52 @@ The application provides two genuinely independent modeling pipelines. **The 4-f
 ## Key Features
 
 ### 1. Patient Risk Assessment & Mode Selection
-- **Clean Mode Selector**: Users choose between **Detailed Assessment** (13 clinical parameters) and **Quick Risk Check** (4 basic measurements).
-- **13-Step Progress Indicator**: Real-time progress bar tracking completed clinical fields with completion percentage.
-- **Clinical Tooltips**: In-line tooltips providing documented clinical definitions (e.g., ST depression, Thallium scintigraphy defect categories, fluoroscopy vessels).
-- **Smart Presets**: One-click preset filling for testing (e.g., Healthy Baseline, Elevated Risk).
-- **Seamless Transition**: After completing a Quick Risk Check, a single click transfers entered Age, Gender, BP, and Max HR directly into the Detailed Assessment form.
+- **Clean Mode Selector**: Choose between **Detailed Assessment** (13 clinical parameters) and **Quick Risk Check** (4 basic measurements: Age, Gender, Blood Pressure, Heart Rate).
+- **13-Step Progress Indicator**: Real-time progress bar displaying completion percentage.
+- **Clinical Tooltips**: In-line tooltips providing definitions for complex terms (e.g., ST depression, Thallium scintigraphy defect categories, fluoroscopy vessels).
+- **Test Presets**: Instant pre-filling with sample low-risk and elevated-risk patient profiles.
+- **Seamless Transition**: Transfer Age, Gender, BP, and Max HR directly from Quick Check into Detailed Assessment with a single click.
 
 ### 2. Explainable AI & Feature Attribution
-- **Exact Mathematical Decomposition**: For every individual prediction, decomposes the logit score into standardized feature components ($z_i \times w_i$).
-- **Directional Categorization**: Segregates patient factors into **Factors Increasing Model Score (+ Risk)** and **Factors Decreasing Model Score (Protective / -)**.
-- **Contribution Bar Chart**: Horizontal bar chart ranking all inputs by absolute impact magnitude ($|z_i \times w_i|$).
-- **Technical Inspection Drawer**: Expandable table exposing exact coefficients ($w_i$), standardized values ($Z$), intercept ($\beta_0$), logit score, and probability calculation formula ($P = \frac{1}{1 + e^{-\text{logit}}}$).
+- **Mathematical Decomposition**: Decomposes the logit score into standardized feature contributions (`z_i * w_i`).
+- **Directional Grouping**: Categorizes inputs into **Factors Increasing Model Score (+ Risk)** and **Factors Decreasing Model Score (Protective / -)**.
+- **Horizontal Contribution Chart**: Bar chart ranking inputs by absolute impact magnitude (`|z_i * w_i|`).
+- **Technical Inspection Drawer**: Expandable table exposing exact coefficients (`w_i`), standardized values (`Z`), base intercept (`beta_0`), logit score, and probability calculation.
 
 ### 3. Interactive What-If Counterfactual Simulator
-- **Live Risk Adjustment**: Modify individual biomarkers (e.g., lower total cholesterol from 280 to 200 mg/dl, reduce resting BP from 155 to 125 mm Hg, increase peak HR from 120 to 160 bpm) and calculate instantaneous probability deltas ($\Delta = P_{\text{modified}} - P_{\text{baseline}}$).
-- **Visual Impact Indicators**: Color-coded directional badges indicating risk elevation or reduction.
-- **Baseline Pre-loading**: Directly launch What-If scenarios from completed patient assessments.
+- **Live Risk Adjustment**: Modify individual biomarkers (e.g., lower cholesterol from 280 to 200 mg/dl, reduce resting BP from 155 to 125 mm Hg, increase peak HR from 120 to 160 bpm) and view instantaneous probability deltas (`Delta = P_modified - P_baseline`).
+- **Color-Coded Badges**: Immediate visual indicators for risk elevation or reduction.
+- **Baseline Pre-loading**: Launch What-If scenarios directly from completed patient assessments.
 
 ### 4. Feature Sensitivity Analysis
-- **Univariate Perturbation Gradients**: Systematically sweeps each biomarker across its valid clinical range while holding all other patient features strictly constant.
-- **Sensitivity Ranking**: Ranks features by maximum probability swing ($\Delta P_{\max} - P_{\min}$) to identify which parameters exert the greatest influence on that patient's outcome.
+- **Univariate Perturbation Gradients**: Sweeps each biomarker across its valid clinical range while holding all other patient features strictly constant.
+- **Sensitivity Ranking**: Ranks features by maximum probability swing (`Delta P_max - P_min`) to show which parameters exert the greatest influence on that patient's outcome.
 - **Interactive Visualizer**: Dynamic probability response curves highlighting the patient's current coordinate.
 
 ### 5. Classification Threshold Explorer
-- **Operational Decision Boundary Exploration**: Adjust the classification cutoff $\tau \in [0.10, 0.90]$ with presets ($0.30$, $0.40$, $0.50$, $0.60$, $0.70$).
-- **Real-Time Performance Metrics**: Dynamically recalculates True Positives, False Positives, False Negatives, True Negatives, Accuracy, Precision, Recall (Sensitivity), and F1-Score on 126,000 held-out clinical test records.
+- **Decision Cutoff Optimization**: Adjust the classification cutoff `threshold in [0.10, 0.90]` with presets (`0.30`, `0.40`, `0.50`, `0.60`, `0.70`).
+- **Real-Time Performance Metrics**: Recalculates True Positives, False Positives, False Negatives, True Negatives, Accuracy, Precision, Recall (Sensitivity), and F1-Score on 126,000 held-out test records.
 
 ### 6. Interactive ROC Curve Explorer
 - **Empirical ROC Trajectory**: Renders 100 empirical ROC curve points computed on the test set alongside the 45-degree random chance diagonal.
-- **Operating Coordinate Crosshairs**: Synchronized with the threshold slider; animated crosshair displays the corresponding True Positive Rate (Sensitivity), False Positive Rate ($1 - \text{Specificity}$), and Youden's $J$ Index ($J = \text{TPR} - \text{FPR}$).
+- **Operating Crosshairs**: Synchronized with the threshold slider; displays the corresponding True Positive Rate (Sensitivity), False Positive Rate (`1 - Specificity`), and Youden's J Index (`J = TPR - FPR`).
 
 ### 7. Confusion Matrix Explorer
-- **Dynamic Contingency Table**: Interactive $2 \times 2$ matrix displaying True Negatives, False Positives, False Negatives, and True Positives.
-- **Interactive Tooltips**: Clear pedagogical breakdowns of Type I (False Positive / False Alarm) and Type II (False Negative / Missed Diagnosis) errors in clinical risk assessment.
+- **Dynamic Contingency Table**: Interactive 2x2 matrix displaying True Negatives, False Positives, False Negatives, and True Positives.
+- **Concept Cards**: Clear definitions of Type I (False Positive / False Alarm) and Type II (False Negative / Missed Diagnosis) errors in clinical risk assessment.
 
 ### 8. Model Coefficient Explorer
-- **Direct Weight Inspection**: Exposes exact trained weights directly from `model.coef_` and intercepts ($\beta_0$) without hardcoded approximations.
-- **Interactive Sorting & Filtering**: Sort by absolute weight magnitude ($|w_i|$), positive vs. negative log-odds impact, or alphabetical name.
+- **Direct Weight Inspection**: Exposes exact trained weights directly from `model.coef_` and intercepts (`beta_0`) without hardcoded approximations.
+- **Interactive Sorting**: Sort by absolute magnitude (`|w_i|`), positive vs. negative log-odds impact, or alphabetical name.
 
-### 9. Prediction History
+### 9. Prediction History Manager
 - **Persistent Local Storage**: Stores past assessments locally in browser `localStorage`.
 - **Mode-Aware Records**: Distinctly categorizes assessments as **Detailed Assessment** or **Quick Risk Check**.
-- **Actions**: Review historical probabilities and risk bands, reload parameters into the form, or export to PDF.
+- **Actions**: Review historical probabilities, reload past parameters into the form, or export to PDF.
 
 ### 10. Printable PDF Clinical Reports
 - **Multi-Section Assessment Summary**: Generates clean, downloadable PDF documents formatted for printing.
-- **Comprehensive Content**: Features summary risk badges, input parameters, feature attribution rankings, pipeline metadata, and prominent educational disclaimers.
+- **Comprehensive Content**: Features summary risk badges, input parameters, feature attribution rankings, pipeline metadata, and educational disclaimers.
 - **Dual Support**: Formats separate reports for both Detailed and Quick prediction modes.
 
 ### 11. Dark / Light Mode System
@@ -136,9 +148,9 @@ The application provides two genuinely independent modeling pipelines. **The 4-f
 
 ---
 
-## Model Evaluation & Quality Gate
+## Model Performance & Evaluation
 
-Both models are evaluated on **126,000 held-out clinical test records** using **5-Fold Stratified Cross-Validation**. Metrics are computed from test data:
+Both models are evaluated on **126,000 held-out clinical test records** using **5-Fold Stratified Cross-Validation**.
 
 | Evaluation Metric | Main Model (13 Features) | Quick Model (4 Features) | Tradeoff / Analysis |
 | :--- | :--- | :--- | :--- |
@@ -153,15 +165,13 @@ Both models are evaluated on **126,000 held-out clinical test records** using **
 
 ### Confusion Matrices (126,000 Test Records)
 
-#### Main Model (13 Features, Threshold $\tau = 0.50$):
 ```
+Main Model (13 Features, Threshold = 0.50):
                           Predicted Negative (0)    Predicted Positive (1)
 Actual Negative (0):              61,938 (TN)               7,571 (FP)
 Actual Positive (1):               7,026 (FN)              49,465 (TP)
-```
 
-#### Quick Model (4 Features, Threshold $\tau = 0.50$):
-```
+Quick Model (4 Features, Threshold = 0.50):
                           Predicted Negative (0)    Predicted Positive (1)
 Actual Negative (0):              51,195 (TN)              18,314 (FP)
 Actual Positive (1):              14,415 (FN)              42,076 (TP)
@@ -170,9 +180,9 @@ Actual Positive (1):              14,415 (FN)              42,076 (TP)
 ### Learned Quick Model Coefficients (`quick_model.coef_`)
 - **Age**: `+0.4270` (higher age increases cardiac risk score)
 - **Sex**: `+0.7472` (male sex increases baseline risk score)
-- **Blood Pressure (BP)**: `-0.0065` (minimal independent linear coefficient when conditioned on age and heart rate)
+- **Blood Pressure (BP)**: `-0.0065` (minimal independent linear effect when controlled for age and heart rate)
 - **Heart Rate (Max HR)**: `-1.0560` (higher peak exertion heart rate acts as a strong protective factor)
-- **Base Intercept ($\beta_0$)**: `-0.0744`
+- **Base Intercept (`beta_0`)**: `-0.0744`
 
 ---
 
@@ -229,14 +239,28 @@ Returns comprehensive evaluation metrics, cross-validation scores, dataset summa
 
 #### `POST /predict`
 Submits 13 clinical biomarkers for detailed risk prediction, risk categorization, and feature attribution.
-```json
-// Request Body:
-{
-  "age": 62, "sex": 1, "cp": 4, "trestbps": 155, "chol": 290, "fbs": 1,
-  "restecg": 2, "thalach": 120, "exang": 1, "oldpeak": 2.8, "slope": 2, "ca": 2, "thal": 7
-}
 
-// Response Body:
+**Request Body:**
+```json
+{
+  "age": 62,
+  "sex": 1,
+  "cp": 4,
+  "trestbps": 155,
+  "chol": 290,
+  "fbs": 1,
+  "restecg": 2,
+  "thalach": 120,
+  "exang": 1,
+  "oldpeak": 2.8,
+  "slope": 2,
+  "ca": 2,
+  "thal": 7
+}
+```
+
+**Response Body:**
+```json
 {
   "logistic_regression": {
     "prediction": 1,
@@ -260,17 +284,20 @@ Submits 13 clinical biomarkers for detailed risk prediction, risk categorization
 ### Quick Risk Check Endpoints
 
 #### `POST /api/quick-predict`
-Submits 4 accessible parameters for fast screening prediction:
+Submits 4 accessible parameters for fast screening prediction.
+
+**Request Body:**
 ```json
-// Request Body:
 {
   "age": 62,
   "sex": 1,
   "bp": 155,
   "max_hr": 120
 }
+```
 
-// Response Body:
+**Response Body:**
+```json
 {
   "probability": 0.6454,
   "percentage": 64.5,
@@ -298,84 +325,84 @@ Returns evaluation metrics, sample distributions, confusion matrix, and feature 
 ### Advanced ML Analysis Endpoints
 
 #### `POST /api/what-if`
-Accepts `baseline` and `modified` patient objects; returns comparative predictions and percentage point deltas ($\Delta$).
+Accepts `baseline` and `modified` patient objects; returns comparative predictions and percentage point deltas (`Delta`).
 
 #### `POST /api/sensitivity`
 Accepts a patient profile; returns probability swing rankings and univariate perturbation test curves for all 13 features.
 
 #### `GET /api/threshold-analysis?threshold=0.50`
-Computes TP, FP, FN, TN, Accuracy, Precision, Recall, and F1-Score for the specified classification cutoff $\tau \in [0.10, 0.90]$.
+Computes TP, FP, FN, TN, Accuracy, Precision, Recall, and F1-Score for the specified classification cutoff `threshold in [0.10, 0.90]`.
 
 #### `GET /api/roc-data`
-Returns 100 empirical ROC curve coordinates (`fpr`, `tpr`, `threshold`) and ROC-AUC score ($95.16\%$).
+Returns 100 empirical ROC curve coordinates (`fpr`, `tpr`, `threshold`) and ROC-AUC score (95.16%).
 
 #### `GET /api/confusion-matrix?threshold=0.50`
-Returns the $2 \times 2$ contingency table counts and educational definitions for the given threshold.
+Returns the 2x2 contingency table counts and educational definitions for the given threshold.
 
 #### `GET /api/model-coefficients`
 Returns the trained Logistic Regression feature coefficients, intercept, and regularization metadata.
 
 ---
 
-## Project Architecture & Directory Structure
+## Project Structure
 
 ```text
 Heart Disease Prediction/
-│
-├── backend/
-│   ├── dataset/
-│   │   └── heart.csv                       # UCI Heart Disease dataset (~630k rows)
-│   ├── models/
-│   │   ├── logistic_model.pkl              # 13-feature L2 Logistic Regression model
-│   │   ├── scaler.pkl                      # 16-feature StandardScaler
-│   │   ├── advanced_analysis_artifacts.pkl # ROC points, thresholds, confusion matrices
-│   │   ├── quick_logistic_model.pkl        # 4-feature Quick Logistic Regression model
-│   │   ├── quick_scaler.pkl                # 4-feature Quick StandardScaler
-│   │   └── quick_metrics.json              # Quick Model evaluation metrics
-│   ├── utils/
-│   │   ├── preprocess.py                   # 13-feature validation, scaling, decomposition
-│   │   └── quick_preprocess.py             # 4-feature validation, scaling, decomposition
-│   ├── app.py                              # Flask application & 12 REST API endpoints
-│   ├── train_model.py                      # Training script for 13-feature model
-│   ├── train_quick_model.py                # Training script for 4-feature Quick model
-│   ├── generate_advanced_artifacts.py      # Artifacts pre-computation script
-│   ├── test_app_integration.py             # Integration test suite (18 automated tests)
-│   ├── test_live_api.py                    # Live HTTP test suite (12 endpoints)
-│   └── requirements.txt                    # Backend Python dependencies
-│
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── PatientForm.jsx             # 13-input clinical parameter form
-│   │   │   ├── PredictionResult.jsx        # Detailed prediction results & charts
-│   │   │   ├── QuickPatientForm.jsx        # 4-input Quick Risk Check form
-│   │   │   ├── QuickPredictionResult.jsx   # Quick Risk Check results & decomposition
-│   │   │   ├── RiskBar.jsx                 # Animated risk band progress bar
-│   │   │   ├── PredictionHistory.jsx       # History manager (Detailed & Quick)
-│   │   │   ├── ModelPerformance.jsx        # Dual Model evaluation & comparison
-│   │   │   ├── AdvancedAnalysisDashboard.jsx# Advanced ML suite container
-│   │   │   ├── WhatIfSimulator.jsx         # Counterfactual simulation tool
-│   │   │   ├── SensitivityAnalysis.jsx     # Feature sensitivity curves
-│   │   │   ├── ThresholdAnalysis.jsx       # Decision cutoff optimizer
-│   │   │   ├── RocExplorer.jsx             # Interactive ROC curve
-│   │   │   ├── ConfusionMatrixExplorer.jsx # Dynamic confusion matrix
-│   │   │   └── CoefficientExplorer.jsx     # Mathematical weight explorer
-│   │   ├── utils/
-│   │   │   └── generatePdfReport.js        # jsPDF report generation engine
-│   │   ├── styles/
-│   │   │   └── App.css                     # Complete design system & themes
-│   │   ├── api.js                          # Axios HTTP client & endpoint methods
-│   │   ├── App.jsx                         # Main app shell, mode routing, theme
-│   │   └── main.jsx                        # React root entry point
-│   ├── package.json                        # Frontend dependencies & scripts
-│   └── vite.config.js                      # Vite build configuration
-│
-└── README.md                               # Project documentation
+|
++-- backend/
+|   +-- dataset/
+|   |   \-- heart.csv                       # UCI Heart Disease dataset (~630k rows)
+|   +-- models/
+|   |   +-- logistic_model.pkl              # 13-feature L2 Logistic Regression model
+|   |   +-- scaler.pkl                      # 16-feature StandardScaler
+|   |   +-- advanced_analysis_artifacts.pkl # ROC points, thresholds, confusion matrices
+|   |   +-- quick_logistic_model.pkl        # 4-feature Quick Logistic Regression model
+|   |   +-- quick_scaler.pkl                # 4-feature Quick StandardScaler
+|   |   \-- quick_metrics.json              # Quick Model evaluation metrics
+|   +-- utils/
+|   |   +-- preprocess.py                   # 13-feature validation, scaling, decomposition
+|   |   \-- quick_preprocess.py             # 4-feature validation, scaling, decomposition
+|   +-- app.py                              # Flask application & 12 REST API endpoints
+|   +-- train_model.py                      # Training script for 13-feature model
+|   +-- train_quick_model.py                # Training script for 4-feature Quick model
+|   +-- generate_advanced_artifacts.py      # Artifacts pre-computation script
+|   +-- test_app_integration.py             # Integration test suite (18 automated tests)
+|   +-- test_live_api.py                    # Live HTTP test suite (12 endpoints)
+|   \-- requirements.txt                    # Backend Python dependencies
+|
++-- frontend/
+|   +-- src/
+|   |   +-- components/
+|   |   |   +-- PatientForm.jsx             # 13-input clinical parameter form
+|   |   |   +-- PredictionResult.jsx        # Detailed prediction results & charts
+|   |   |   +-- QuickPatientForm.jsx        # 4-input Quick Risk Check form
+|   |   |   +-- QuickPredictionResult.jsx   # Quick Risk Check results & decomposition
+|   |   |   +-- RiskBar.jsx                 # Animated risk band progress bar
+|   |   |   +-- PredictionHistory.jsx       # History manager (Detailed & Quick)
+|   |   |   +-- ModelPerformance.jsx        # Dual Model evaluation & comparison
+|   |   |   +-- AdvancedAnalysisDashboard.jsx# Advanced ML suite container
+|   |   |   +-- WhatIfSimulator.jsx         # Counterfactual simulation tool
+|   |   |   +-- SensitivityAnalysis.jsx     # Feature sensitivity curves
+|   |   |   +-- ThresholdAnalysis.jsx       # Decision cutoff optimizer
+|   |   |   +-- RocExplorer.jsx             # Interactive ROC curve
+|   |   |   +-- ConfusionMatrixExplorer.jsx # Dynamic confusion matrix
+|   |   |   \-- CoefficientExplorer.jsx     # Mathematical weight explorer
+|   |   +-- utils/
+|   |   |   \-- generatePdfReport.js        # jsPDF report generation engine
+|   |   +-- styles/
+|   |   |   \-- App.css                     # Complete design system & themes
+|   |   +-- api.js                          # Axios HTTP client & endpoint methods
+|   |   +-- App.jsx                         # Main app shell, mode routing, theme
+|   |   \-- main.jsx                        # React root entry point
+|   +-- package.json                        # Frontend dependencies & scripts
+|   \-- vite.config.js                      # Vite build configuration
+|
+\-- README.md                               # Project documentation
 ```
 
 ---
 
-## Installation & Local Setup
+## Installation & Setup
 
 ### Prerequisites
 - **Python**: Version `3.10` or higher
@@ -421,7 +448,7 @@ Visit **`http://localhost:5173`** in your browser.
 
 ## Running Automated Tests
 
-The repository includes comprehensive automated test suites covering input validations, probability bounds, model scaling, What-If simulation, sensitivity curves, and all 12 live API routes:
+The repository includes automated test suites covering input validations, probability bounds, model scaling, counterfactual simulations, and all 12 live API routes:
 
 ### 1. Integration Test Suite
 ```bash
@@ -476,5 +503,3 @@ All training scripts utilize `random_state=42` and stratified splits to guarante
 ## License
 
 This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
-#   H e a r t - D i s e a s e - P r e d i c t i o n - U s i n g - L o g i s t i c - R e g r e s s i o n  
- 
